@@ -1,0 +1,19 @@
+{
+  "name": "lottery-profit-checker",
+  "version": "1.0.0",
+  "description": "Check profits on playing the lottery",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bravokiloecho/lottery-profit-checker.git"
+  },
+  "author": "ben@elwyn.co",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bravokiloecho/lottery-profit-checker/issues"
+  },
+  "homepage": "https://github.com/bravokiloecho/lottery-profit-checker#readme"
+}
