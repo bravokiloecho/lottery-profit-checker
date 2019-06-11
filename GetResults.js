@@ -1,6 +1,5 @@
-var curl = require('curlrequest');
-
-var csv = require("fast-csv")
+const curl = require('curlrequest')
+const csv = require("fast-csv")
 
 // DOWNLOAD THE CSV
 // --------------------
@@ -30,10 +29,10 @@ function parseCsv(string) {
       .on("data", function(data){
         resolve(data)
       })
-      .on("end", function(){
-        console.log("done")
-      })
-  });
+      // .on("end", function(){
+      //   console.log("done")
+      // })
+  })
 }
 
 // GET THE RESULTS AS AN ARRAY
@@ -48,7 +47,8 @@ function getResultsObj(csv) {
       csv['Ball 5'],
       csv['Ball 6'],
     ],
-    bonus: csv['Bonus Ball']
+    bonus: csv['Bonus Ball'],
+    drawNumber: csv['DrawNumber'],
   }
 }
 
@@ -60,7 +60,7 @@ const GetResults = async function () {
   
   const csv = await parseCsv(csvString)
 
-  const obj = getResultsObj( csv );
+  const obj = getResultsObj( csv )
 
   return obj
 }
