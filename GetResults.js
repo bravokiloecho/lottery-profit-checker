@@ -1,3 +1,9 @@
+/*
+*
+Get the numbers from the draw
+*
+*/
+
 const curl = require('curlrequest')
 const csv = require("fast-csv")
 

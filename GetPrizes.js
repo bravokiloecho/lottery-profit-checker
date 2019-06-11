@@ -10,7 +10,6 @@ const cheerio = require('cheerio')
 // Gets the markup for the results page
 function downloadResultsPage(drawNumber) {
   const url = `https://www.national-lottery.co.uk/results/lotto/draw-history/prize-breakdown/${ drawNumber }`
-  console.log('url: ' + url);
   const options = {
     url
   }
