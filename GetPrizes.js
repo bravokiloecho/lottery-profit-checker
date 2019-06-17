@@ -46,28 +46,20 @@ function convertPrizeToFloat(string) {
 
 // EXPORT
 const GetPrizes = async function (drawNumber) {
-  // Define fixed prizes
-  const prizes = {
-    fivePlusBonus: 1000000,
-    five: 1750,
-    four: 140,
-    three: 30,
-    two: 'Free Lotto Lucky Dip',
-  }
-
   const resultsHtml = await downloadResultsPage(drawNumber)
   const $ = cheerio.load(resultsHtml)
 
   const jackpot = getTotalJackpot($)
   const sharedJackpot = getSharedJackpot($)
 
-  if (!!sharedJackpot) {
-    prizes.jackpot = sharedJackpot
-  } else {
-    prizes.jackpot = jackpot
+  return {
+    fivePlusBonus: 1000000,
+    five: 1750,
+    four: 140,
+    three: 30,
+    two: 'Free Lotto Lucky Dip',
+    jackpot: !!sharedJackpot || jackpot
   }
-
-  return prizes
 }
 
 module.exports = GetPrizes
