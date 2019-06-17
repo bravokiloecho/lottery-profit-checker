@@ -25,15 +25,23 @@ function downloadResultsPage(drawNumber) {
   })
 }
 
-function getJackpot(html) {
+function getTotalJackpot($) {
+  const jackpot = $('#game_header_intro').text()
+  const jackpotFloat = convertPrizeToFloat( jackpot )
+  return jackpotFloat
+}
 
-  const $ = cheerio.load(html)
-  let jackpot = $('#game_header_intro').text()
-  jackpot = jackpot.split('£')[1]
-  jackpot = jackpot.replace(/,/g, '')
-  jackpot = parseFloat(jackpot)
+function getSharedJackpot($) {
+  const prize = $('#prize_per_player_0').children().first().text()
+  const prizeFloat = convertPrizeToFloat(prize)
+  return prizeFloat
+}
 
-  return jackpot
+function convertPrizeToFloat(string) {
+  string = string.split('£')[1]
+  string = string.replace(/,/g, '')
+  string = parseFloat(string)
+  return string
 }
 
 // EXPORT
@@ -48,7 +56,17 @@ const GetPrizes = async function (drawNumber) {
   }
 
   const resultsHtml = await downloadResultsPage(drawNumber)
-  prizes.jackpot = getJackpot(resultsHtml)
+  const $ = cheerio.load(resultsHtml)
+
+  const jackpot = getTotalJackpot($)
+  const sharedJackpot = getSharedJackpot($)
+
+  if (!!sharedJackpot) {
+    prizes.jackpot = sharedJackpot
+  } else {
+    prizes.jackpot = jackpot
+  }
+
   return prizes
 }
 
