@@ -47,20 +47,46 @@ function getTicketValue(ticket, results, prizes) {
 
 // EXPORT
 const TestTickets = (results, prizes) => {
+
+	const currencyFormatter = new Intl.NumberFormat('en-GB', {
+		style: 'currency',
+		currency: 'GBP',
+	})
+
 	const winnings = {
 		cash: 0,
+		cashPrizes: 0,
 		freeTickets: 0,
+		worthlessTickets: 0,
+		totalTicketsBought: totalTickets.toLocaleString('en'),
+		totalMoneySpent: currencyFormatter.format(budget),
 	}
 	for (let i = 0; i < totalTickets; i += 1) {
 		const ticket = getTicket()
 		const ticketValue = getTicketValue(ticket, results, prizes)
-		if (ticketValue === 'freeTicket') {
+		if (ticketValue === 0) {
+			winnings.worthlessTickets += 1
+		} else if (ticketValue === 'freeTicket') {
 			winnings.freeTickets += 1
 		} else {
 			winnings.cash += ticketValue
+			winnings.cashPrizes += 1
 		}
 	}
-	return winnings
+
+	const earnings = winnings.cash - budget
+
+	const formattedWinnings = {
+		...winnings,
+		cashWon: currencyFormatter.format(winnings.cash),
+		totalCashPrizes: winnings.cashPrizes.toLocaleString('en'),
+		totalFreeTicketsWon: winnings.freeTickets.toLocaleString('en'),
+		worthlessTickets: winnings.worthlessTickets.toLocaleString('en'),
+		earnings: currencyFormatter.format(earnings),
+		profit: earnings > 0,
+	}
+
+	return formattedWinnings
 }
 
 module.exports = TestTickets

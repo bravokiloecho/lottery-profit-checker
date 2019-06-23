@@ -9,7 +9,7 @@ async function CheckProfit() {
 		console.log(err)
 	})
 
-	console.log(results)
+	console.log('draw results', results)
 
 	// Get the prize money values
 	const { drawNumber } = results
@@ -18,12 +18,12 @@ async function CheckProfit() {
 		console.log(err)
 	})
 
-	console.log('prizes', prizes)
+	console.log('prize breakdown', prizes)
 
 	// Test the tickets
 	const profit = TestTickets(results, prizes)
 
-	console.log('profit', profit)
+	console.log('profit/loss', profit)
 }
 
 CheckProfit()
