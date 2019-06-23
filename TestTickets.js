@@ -58,9 +58,8 @@ const TestTickets = (results, prizes) => {
 		cashPrizes: 0,
 		freeTickets: 0,
 		worthlessTickets: 0,
-		totalTicketsBought: totalTickets.toLocaleString('en'),
-		totalMoneySpent: currencyFormatter.format(budget),
 	}
+
 	for (let i = 0; i < totalTickets; i += 1) {
 		const ticket = getTicket()
 		const ticketValue = getTicketValue(ticket, results, prizes)
@@ -77,12 +76,13 @@ const TestTickets = (results, prizes) => {
 	const earnings = winnings.cash - budget
 
 	const formattedWinnings = {
-		...winnings,
 		cashWon: currencyFormatter.format(winnings.cash),
-		totalCashPrizes: winnings.cashPrizes.toLocaleString('en'),
-		totalFreeTicketsWon: winnings.freeTickets.toLocaleString('en'),
-		worthlessTickets: winnings.worthlessTickets.toLocaleString('en'),
 		earnings: currencyFormatter.format(earnings),
+		totalFreeTicketsWon: winnings.freeTickets.toLocaleString('en'),
+		totalCashPrizes: winnings.cashPrizes.toLocaleString('en'),
+		worthlessTickets: winnings.worthlessTickets.toLocaleString('en'),
+		totalTicketsBought: totalTickets.toLocaleString('en'),
+		totalMoneySpent: currencyFormatter.format(budget),
 		profit: earnings > 0,
 	}
 
