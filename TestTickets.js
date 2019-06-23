@@ -4,7 +4,7 @@
 
 const ticketPrice = 2
 // const budget = 1000000
-const budget = 100
+const budget = 1000000
 const totalTickets = Math.floor(budget / ticketPrice)
 
 function getRandom(min, max) {
