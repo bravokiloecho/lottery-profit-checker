@@ -72,6 +72,8 @@ const GetPrizes = async (drawNumber) => {
 		4: 140,
 		3: 30,
 		2: 'freeTicket',
+		1: 0,
+		0: 0,
 	}
 }
 
