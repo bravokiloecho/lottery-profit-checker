@@ -46,47 +46,47 @@ function getTicketValue(ticket, results, prizes) {
 }
 
 // EXPORT
-const TestTickets = (results, prizes) => {
+const TestTickets = (results, prizes, previousSummary) => {
+	// Get free tickets from previous round
+	const { freeTickets } = previousSummary
 
-	const currencyFormatter = new Intl.NumberFormat('en-GB', {
-		style: 'currency',
-		currency: 'GBP',
-	})
-
+	// Define winnings, updated later
 	const winnings = {
-		cash: 0,
-		cashPrizes: 0,
-		freeTickets: 0,
+		previousFreeTickets: freeTickets,
+		totalMoneySpent: budget,
+		cashWon: 0,
+		totalCashPrizes: 0,
+		freeTicketsWon: 0,
 		worthlessTickets: 0,
 	}
 
-	for (let i = 0; i < totalTickets; i += 1) {
+	const updatedTotalTickets = freeTickets
+		? totalTickets + freeTickets
+		: totalTickets
+
+	for (let i = 0; i < updatedTotalTickets; i += 1) {
 		const ticket = getTicket()
 		const ticketValue = getTicketValue(ticket, results, prizes)
 		if (ticketValue === 0) {
 			winnings.worthlessTickets += 1
 		} else if (ticketValue === 'freeTicket') {
-			winnings.freeTickets += 1
+			winnings.freeTicketsWon += 1
 		} else {
-			winnings.cash += ticketValue
-			winnings.cashPrizes += 1
+			winnings.cashWon += ticketValue
+			winnings.totalCashPrizes += 1
 		}
 	}
 
-	const earnings = winnings.cash - budget
+	const earnings = winnings.cashWon - budget
 
-	const formattedWinnings = {
-		cashWon: currencyFormatter.format(winnings.cash),
-		earnings: currencyFormatter.format(earnings),
-		totalFreeTicketsWon: winnings.freeTickets.toLocaleString('en'),
-		totalCashPrizes: winnings.cashPrizes.toLocaleString('en'),
-		worthlessTickets: winnings.worthlessTickets.toLocaleString('en'),
-		totalTicketsBought: totalTickets.toLocaleString('en'),
-		totalMoneySpent: currencyFormatter.format(budget),
-		profit: earnings > 0,
+	const updatedWinnings = {
+		...winnings,
+		ticketsBought: totalTickets,
+		totalTicketsUsed: updatedTotalTickets,
+		isProfit: earnings > 0,
 	}
 
-	return formattedWinnings
+	return updatedWinnings
 }
 
 module.exports = TestTickets
