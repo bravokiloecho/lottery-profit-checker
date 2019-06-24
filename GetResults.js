@@ -52,6 +52,7 @@ function getResultsObj(csvResult) {
 			parseFloat(csvResult['Ball 6']),
 		],
 		bonus: parseFloat(csvResult['Bonus Ball']),
+		drawDate: csvResult.DrawDate,
 		drawNumber: csvResult.DrawNumber,
 	}
 }

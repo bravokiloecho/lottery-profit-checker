@@ -13,6 +13,7 @@ const SaveResults = async (dataFile, oldData, results) => {
 		accumulatedEarnings: accumulatedEarnings + cashWon,
 		roundsPlayed: roundsPlayed + 1,
 		accumulatedSpend: accumulatedSpend + previouslySpent,
+		isAccumulatedProfit: accumulatedEarnings > accumulatedSpend,
 	}
 	// Calc profit loss
 	newData.accumulatedProfitLoss = newData.accumulatedEarnings - newData.accumulatedSpend
