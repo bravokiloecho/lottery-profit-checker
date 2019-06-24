@@ -27,22 +27,26 @@ function getTicketValue(ticket, results, prizes) {
 	const totalMatches = balls.filter(n => ticket.includes(n)).length
 	// Stop here for no prizes
 	if (totalMatches < 2) {
-		return 0
+		return {isJackpot: false, ticketValue: 0}
 	}
 	// Stop here for two
 	if (totalMatches === 2) {
-		return prizes[totalMatches]
+		return {isJackpot: false, ticketValue: prizes[totalMatches]}
 	}
 	// Test for bonus if 5 number
 	if (totalMatches === 5) {
 		const hasBonus = ticket.includes(bonus)
 		if (hasBonus) {
-			return prizes['5+Bonus']
+			return {isJackpot: false, ticketValue: prizes['5+Bonus']}
 		}
-		return prizes[totalMatches]
+		return {isJackpot: false, ticketValue: prizes[totalMatches]}
 	}
 
-	return prizes[totalMatches]
+	if (totalMatches === 6) {
+		return {isJackpot: true, ticketValue: prizes[totalMatches]}
+	}
+
+	return {isJackpot: false, ticketValue: prizes[totalMatches]}
 }
 
 // EXPORT
@@ -58,6 +62,7 @@ const TestTickets = (results, prizes, previousSummary) => {
 		totalCashPrizes: 0,
 		freeTicketsWon: 0,
 		worthlessTickets: 0,
+		jackpotWon: false,
 	}
 
 	const updatedTotalTickets = freeTickets
@@ -66,7 +71,7 @@ const TestTickets = (results, prizes, previousSummary) => {
 
 	for (let i = 0; i < updatedTotalTickets; i += 1) {
 		const ticket = getTicket()
-		const ticketValue = getTicketValue(ticket, results, prizes)
+		const { ticketValue, isJackpot } = getTicketValue(ticket, results, prizes)
 		if (ticketValue === 0) {
 			winnings.worthlessTickets += 1
 		} else if (ticketValue === 'freeTicket') {
@@ -75,15 +80,19 @@ const TestTickets = (results, prizes, previousSummary) => {
 			winnings.cashWon += ticketValue
 			winnings.totalCashPrizes += 1
 		}
+		if (isJackpot) {
+			winnings.jackpotWon = true
+		}
 	}
 
-	const earnings = winnings.cashWon - budget
+	const roundEarnings = winnings.cashWon - budget
 
 	const updatedWinnings = {
 		...winnings,
 		ticketsBought: totalTickets,
 		totalTicketsUsed: updatedTotalTickets,
-		isProfit: earnings > 0,
+		roundEarnings,
+		isProfit: roundEarnings > 0,
 	}
 
 	return updatedWinnings
