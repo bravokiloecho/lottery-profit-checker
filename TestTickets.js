@@ -48,12 +48,12 @@ function getTicketValue(ticket, results, prizes) {
 // EXPORT
 const TestTickets = (results, prizes, previousSummary) => {
 	// Get free tickets from previous round
-	const { freeTickets } = previousSummary
+	const { freeTickets = 0 } = previousSummary
 
 	// Define winnings, updated later
 	const winnings = {
 		previousFreeTickets: freeTickets,
-		totalMoneySpent: budget,
+		moneySpent: budget,
 		cashWon: 0,
 		totalCashPrizes: 0,
 		freeTicketsWon: 0,
