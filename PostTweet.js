@@ -11,41 +11,63 @@ function formTweet(data) {
 		freeTicketsWon,
 		roundEarnings,
 		roundsPlayed,
+		accumulatedSpend,
+		accumulatedEarnings,
+		accumulatedProfitLoss,
 	} = data
 
 	// Define whether word is profit or loss
 	const earningsWord = isProfit ? 'profit' : 'loss'
 	const accumulatedEarningsWord = isAccumulatedProfit ? 'profit' : 'loss'
 
-	let tweetText = ''
+	let tweetText1 = ''
+	let tweetText2 = ''
 
 	if (jackpotWon) {
-		tweetText += '*** JACKPOT ***\n\n'
+		tweetText1 += '*** JACKPOT ***\n\n'
 	}
 
-	tweetText += `On ${drawDate}, `
+	tweetText1 += `On ${drawDate}, `
 
-	tweetText += `${moneySpent} bought ${ticketsBought} tickets`
+	tweetText1 += `${moneySpent} bought ${ticketsBought} tickets`
 	if (previousFreeTickets) {
-		tweetText += ` with an additional ${previousFreeTickets} free tickets used`
+		tweetText1 += ` with an additional ${previousFreeTickets} free tickets used from the previous draw`
 	}
 
-	tweetText += '.\n'
+	tweetText1 += '.\n\n'
 
-	tweetText += `${cashWon} and ${freeTicketsWon} free tickets were won, `
-	tweetText += `resulting in a ${earningsWord} of ${roundEarnings}.\n`
+	tweetText1 += `${cashWon} and ${freeTicketsWon} free tickets were won, `
+	tweetText1 += `resulting in a ${earningsWord} of ${roundEarnings}.\n`
 
+	// SECOND TWEET
+	tweetText2 += `After ${roundsPlayed} rounds, ${accumulatedSpend} has been spent and `
+	tweetText2 += `${accumulatedEarnings} has been won, `
+	tweetText2 += `resulting in an overall ${accumulatedEarningsWord} of ${accumulatedProfitLoss}.`
 
-	// tweetText += `After ${roundsPlayed} rounds, `
-	// tweetText += `After ${roundsPlayed} rounds, `
-
-	return tweetText
+	return [tweetText1, tweetText2]
 }
 
 const PostTweet = (data) => {
-	const tweet = formTweet(data)
-	console.log(tweet)
-	console.log(tweet.length);
+	// Get tweets
+	const [tweet1, tweet2] = formTweet(data)
+	console.log(tweet1)
+	console.log(tweet2)
+	console.log(tweet1.length)
 }
+
+// bot.post(
+// 	'statuses/update',
+// 	{
+// 		status: '@ReplyToUser I reply to you yes!',
+// 		in_reply_to_status_id: '860900406381211649',
+// 	},
+// 	function(err, data, response) {
+// 		if (err) {
+// 			console.log(err)
+// 		} else {
+// 			console.log(data.text + ' tweeted!')
+// 		}
+// 	},
+// )
 
 module.exports = PostTweet
