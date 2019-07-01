@@ -26,10 +26,10 @@ function downloadResultsPage(drawNumber) {
 }
 
 function convertPrizeToFloat(string) {
-	string = string.split('£')[1]
-	string = string.replace(/,/g, '')
-	string = parseFloat(string)
-	return string
+	let [, amount] = string.split('£')
+	amount = amount.replace(/,/g, '')
+	amount = parseFloat(amount)
+	return amount
 }
 
 function getTotalJackpot($) {
