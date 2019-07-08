@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const ReadData = require('./ReadData')
 const GetResults = require('./GetResults')
 const GetPrizes = require('./GetPrizes')
@@ -5,6 +7,7 @@ const TestTickets = require('./TestTickets')
 const SaveResults = require('./SaveResults')
 const FormatData = require('./FormatData')
 const BuildTweet = require('./BuildTweet')
+const PostTweets = require('./PostTweets')
 
 const dataFile = './db/data.json'
 
@@ -16,6 +19,7 @@ async function CheckProfit() {
 		// If error...
 		console.error(err)
 	})
+	console.log('results', results);
 	// Get the prize money values
 	const { drawNumber } = results
 	const prizes = await GetPrizes(drawNumber).catch((err) => {
@@ -31,8 +35,10 @@ async function CheckProfit() {
 	console.log('formattedData', formattedData)
 	// BUILD TWEETS
 	const tweets = BuildTweet(formattedData)
+	console.log(tweets);
+	return
 	// POST TWEET
-	PostTweet(formattedData)
+	await PostTweets(tweets)
 }
 
 CheckProfit()

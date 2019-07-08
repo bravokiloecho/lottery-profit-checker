@@ -39,9 +39,9 @@ const FormatData = (results, outcome, summary) => {
 		drawDate,
 		prettyDate,
 		// Last round
-		cashWon: currencyFormatter.format(cashWon),
-		moneySpent: currencyFormatter.format(moneySpent),
-		roundEarnings: currencyFormatter.format(roundEarnings),
+		cashWon: currencyFormatter.format(Math.abs(cashWon)),
+		moneySpent: currencyFormatter.format(Math.abs(moneySpent)),
+		roundEarnings: currencyFormatter.format(Math.abs(roundEarnings)),
 		freeTicketsWon: freeTicketsWon.toLocaleString('en'),
 		totalCashPrizes: totalCashPrizes.toLocaleString('en'),
 		worthlessTickets: worthlessTickets.toLocaleString('en'),
@@ -51,9 +51,9 @@ const FormatData = (results, outcome, summary) => {
 		jackpotWon,
 		isProfit,
 		// Overall
-		accumulatedProfitLoss: currencyFormatter.format(accumulatedProfitLoss),
-		accumulatedSpend: currencyFormatter.format(accumulatedSpend),
-		accumulatedEarnings: currencyFormatter.format(accumulatedEarnings),
+		accumulatedProfitLoss: currencyFormatter.format(Math.abs(accumulatedProfitLoss)),
+		accumulatedSpend: currencyFormatter.format(Math.abs(accumulatedSpend)),
+		accumulatedEarnings: currencyFormatter.format(Math.abs(accumulatedEarnings)),
 		roundsPlayed: roundsPlayed.toLocaleString('en'),
 		isAccumulatedProfit,
 	}
