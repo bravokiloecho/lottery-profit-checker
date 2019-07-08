@@ -4,7 +4,7 @@ const GetPrizes = require('./GetPrizes')
 const TestTickets = require('./TestTickets')
 const SaveResults = require('./SaveResults')
 const FormatData = require('./FormatData')
-const PostTweet = require('./PostTweet')
+const BuildTweet = require('./BuildTweet')
 
 const dataFile = './db/data.json'
 
@@ -29,6 +29,8 @@ async function CheckProfit() {
 	// Format data
 	const formattedData = FormatData(results, outcome, summary)
 	console.log('formattedData', formattedData)
+	// BUILD TWEETS
+	const tweets = BuildTweet(formattedData)
 	// POST TWEET
 	PostTweet(formattedData)
 }

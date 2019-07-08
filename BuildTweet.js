@@ -47,27 +47,10 @@ function formTweet(data) {
 	return [tweetText1, tweetText2]
 }
 
-const PostTweet = (data) => {
+const BuildTweet = (data) => {
 	// Get tweets
-	const [tweet1, tweet2] = formTweet(data)
-	console.log(tweet1)
-	console.log(tweet2)
-	console.log(tweet1.length)
+	const tweets = formTweet(data)
+	return tweets
 }
 
-// bot.post(
-// 	'statuses/update',
-// 	{
-// 		status: '@ReplyToUser I reply to you yes!',
-// 		in_reply_to_status_id: '860900406381211649',
-// 	},
-// 	function(err, data, response) {
-// 		if (err) {
-// 			console.log(err)
-// 		} else {
-// 			console.log(data.text + ' tweeted!')
-// 		}
-// 	},
-// )
-
-module.exports = PostTweet
+module.exports = BuildTweet
