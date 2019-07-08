@@ -1,14 +1,14 @@
 require('dotenv').config()
 
-const ReadData = require('./ReadData')
-const GetResults = require('./GetResults')
-const GetPrizes = require('./GetPrizes')
-const TestTickets = require('./TestTickets')
-const SaveResults = require('./SaveResults')
-const FormatData = require('./FormatData')
-const BuildTweet = require('./BuildTweet')
-const PostTweets = require('./PostTweets')
-const StartCron = require('./StartCron')
+const ReadData = require('./tasks/ReadData')
+const GetResults = require('./tasks/GetResults')
+const GetPrizes = require('./tasks/GetPrizes')
+const TestTickets = require('./tasks/TestTickets')
+const SaveResults = require('./tasks/SaveResults')
+const FormatData = require('./tasks/FormatData')
+const BuildTweet = require('./tasks/BuildTweet')
+const PostTweets = require('./tasks/PostTweets')
+const StartCron = require('./tasks/StartCron')
 
 const dataFile = './db/data.json'
 
@@ -20,7 +20,6 @@ async function CheckProfit() {
 		// If error...
 		console.error(err)
 	})
-	console.log('results', results);
 	// Get the prize money values
 	const { drawNumber } = results
 	const prizes = await GetPrizes(drawNumber).catch((err) => {
@@ -33,10 +32,9 @@ async function CheckProfit() {
 	const summary = await SaveResults(dataFile, previousSummary, outcome)
 	// Format data
 	const formattedData = FormatData(results, outcome, summary)
-	console.log('formattedData', formattedData)
-	// BUILD TWEETS
+	// Build tweets
 	const tweets = BuildTweet(formattedData)
-	// POST TWEET
+	// Post tweet
 	await PostTweets(tweets)
 }
 

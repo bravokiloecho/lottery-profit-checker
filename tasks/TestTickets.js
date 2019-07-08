@@ -27,26 +27,26 @@ function getTicketValue(ticket, results, prizes) {
 	const totalMatches = balls.filter(n => ticket.includes(n)).length
 	// Stop here for no prizes
 	if (totalMatches < 2) {
-		return {isJackpot: false, ticketValue: 0}
+		return { isJackpot: false, ticketValue: 0 }
 	}
 	// Stop here for two
 	if (totalMatches === 2) {
-		return {isJackpot: false, ticketValue: prizes[totalMatches]}
+		return { isJackpot: false, ticketValue: prizes[totalMatches] }
 	}
 	// Test for bonus if 5 number
 	if (totalMatches === 5) {
 		const hasBonus = ticket.includes(bonus)
 		if (hasBonus) {
-			return {isJackpot: false, ticketValue: prizes['5+Bonus']}
+			return { isJackpot: false, ticketValue: prizes['5+Bonus'] }
 		}
-		return {isJackpot: false, ticketValue: prizes[totalMatches]}
+		return { isJackpot: false, ticketValue: prizes[totalMatches] }
 	}
 
 	if (totalMatches === 6) {
-		return {isJackpot: true, ticketValue: prizes[totalMatches]}
+		return { isJackpot: true, ticketValue: prizes[totalMatches] }
 	}
 
-	return {isJackpot: false, ticketValue: prizes[totalMatches]}
+	return { isJackpot: false, ticketValue: prizes[totalMatches] }
 }
 
 // EXPORT

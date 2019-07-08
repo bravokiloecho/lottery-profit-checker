@@ -28,9 +28,7 @@ function downloadResultsPage(drawNumber) {
 }
 
 function convertPrizeToFloat(string) {
-	console.log('string: ' + string);
 	let [, amount] = string.split('£')
-	console.log('amount: ' + amount);
 	amount = amount.replace(/,/g, '')
 	amount = parseFloat(amount)
 	return amount
@@ -49,7 +47,6 @@ function getSharedJackpot($) {
 		.text()
 
 	const totalWinners = parseInt($('#winners_count_0').text(), 10)
-	console.log('totalWinners: ' + totalWinners);
 	const prizeFloat = totalWinners ? convertPrizeToFloat(prize) : null
 
 	return {
