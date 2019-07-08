@@ -1,5 +1,13 @@
+const dayjs = require('dayjs')
+const advancedFormat = require('dayjs/plugin/advancedFormat')
+
+dayjs.extend(advancedFormat)
+
 const FormatData = (results, outcome, summary) => {
 	const { drawDate } = results
+	const prettyDate = dayjs('06-Jul-2019', 'DD-MMM-YYY').format(
+		'dddd Do MMMM, YYYY',
+	)
 	const {
 		cashWon,
 		moneySpent,
@@ -29,6 +37,7 @@ const FormatData = (results, outcome, summary) => {
 
 	return {
 		drawDate,
+		prettyDate,
 		// Last round
 		cashWon: currencyFormatter.format(cashWon),
 		moneySpent: currencyFormatter.format(moneySpent),

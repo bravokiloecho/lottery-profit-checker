@@ -3,7 +3,7 @@ function formTweet(data) {
 		isProfit,
 		isAccumulatedProfit,
 		jackpotWon,
-		drawDate,
+		prettyDate,
 		moneySpent,
 		ticketsBought,
 		previousFreeTickets,
@@ -27,7 +27,7 @@ function formTweet(data) {
 		tweetText1 += '*** JACKPOT ***\n\n'
 	}
 
-	tweetText1 += `On ${drawDate}, `
+	tweetText1 += `On ${prettyDate}, `
 
 	tweetText1 += `${moneySpent} bought ${ticketsBought} tickets`
 	if (previousFreeTickets) {
