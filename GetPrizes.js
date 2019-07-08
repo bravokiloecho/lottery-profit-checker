@@ -14,6 +14,8 @@ function downloadResultsPage(drawNumber) {
 		url,
 	}
 
+	console.log(url);
+
 	return new Promise((resolve, reject) => {
 		curl.request(options, (err, html) => {
 			if (err) {
@@ -26,7 +28,9 @@ function downloadResultsPage(drawNumber) {
 }
 
 function convertPrizeToFloat(string) {
+	console.log('string: ' + string);
 	let [, amount] = string.split('£')
+	console.log('amount: ' + amount);
 	amount = amount.replace(/,/g, '')
 	amount = parseFloat(amount)
 	return amount
@@ -43,9 +47,10 @@ function getSharedJackpot($) {
 		.children()
 		.first()
 		.text()
-	const prizeFloat = convertPrizeToFloat(prize)
 
 	const totalWinners = parseInt($('#winners_count_0').text(), 10)
+	console.log('totalWinners: ' + totalWinners);
+	const prizeFloat = totalWinners ? convertPrizeToFloat(prize) : null
 
 	return {
 		sharedJackpot: prizeFloat,
