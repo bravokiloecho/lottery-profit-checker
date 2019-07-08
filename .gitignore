@@ -31,3 +31,4 @@ db/data.json
 
 # ENV
 .env
+.openode
