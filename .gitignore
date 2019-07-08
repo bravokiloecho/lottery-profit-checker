@@ -28,3 +28,6 @@ Thumbs.db
 
 # Data
 db/data.json
+
+# ENV
+.env
