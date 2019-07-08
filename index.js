@@ -8,6 +8,7 @@ const SaveResults = require('./SaveResults')
 const FormatData = require('./FormatData')
 const BuildTweet = require('./BuildTweet')
 const PostTweets = require('./PostTweets')
+const StartCron = require('./StartCron')
 
 const dataFile = './db/data.json'
 
@@ -35,10 +36,9 @@ async function CheckProfit() {
 	console.log('formattedData', formattedData)
 	// BUILD TWEETS
 	const tweets = BuildTweet(formattedData)
-	console.log(tweets);
-	return
 	// POST TWEET
 	await PostTweets(tweets)
 }
 
-CheckProfit()
+// CheckProfit()
+StartCron(CheckProfit)
