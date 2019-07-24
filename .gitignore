@@ -32,3 +32,8 @@ db/data.json
 # ENV
 .env
 .openode
+
+# SERVER
+serverStart.sh
+serverStop.sh
+webfaction/
