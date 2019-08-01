@@ -12,7 +12,7 @@ const StartCron = require('./tasks/StartCron')
 
 const dataFile = './db/data.json'
 
-async function CheckProfit() {
+const CheckProfit = async () => {
 	// Get previous state
 	const previousSummary = await ReadData(dataFile)
 	// Get the results from the draw
