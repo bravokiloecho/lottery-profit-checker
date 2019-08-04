@@ -5,5 +5,6 @@ module.exports = {
 		indent: [2, 'tab'],
 		'no-tabs': 0,
 		'no-console': 'off',
+		'arrow-body-style': 'off',
 	},
 }
