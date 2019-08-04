@@ -19,6 +19,7 @@ function formTweet(data) {
 	// Define whether word is profit or loss
 	const earningsWord = isProfit ? 'profit' : 'loss'
 	const accumulatedEarningsWord = isAccumulatedProfit ? 'profit' : 'loss'
+	const roundsWord = roundsPlayed === 1 ? 'round' : 'rounds'
 
 	let tweetText1 = ''
 	let tweetText2 = ''
@@ -40,7 +41,7 @@ function formTweet(data) {
 	tweetText1 += `resulting in a ${earningsWord} of ${roundEarnings}.\n`
 
 	// SECOND TWEET
-	tweetText2 += `After ${roundsPlayed} rounds, ${accumulatedSpend} has been spent and `
+	tweetText2 += `After ${roundsPlayed} ${roundsWord}, ${accumulatedSpend} has been spent and `
 	tweetText2 += `${accumulatedEarnings} has been won, `
 	tweetText2 += `resulting in an overall ${accumulatedEarningsWord} of ${accumulatedProfitLoss}.`
 
@@ -49,8 +50,7 @@ function formTweet(data) {
 
 const BuildTweet = (data) => {
 	// Get tweets
-	const tweets = formTweet(data)
-	return tweets
+	return formTweet(data)
 }
 
 module.exports = BuildTweet
