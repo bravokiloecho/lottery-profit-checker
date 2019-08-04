@@ -5,7 +5,7 @@ function writeData(dataFile, data) {
 	fs.writeFileSync(dataFile, dataString)
 }
 
-const SaveResults = async (dataFile, oldData, results) => {
+const SaveResults = (dataFile, oldData = {}, results) => {
 	const { cashWon, freeTicketsWon, moneySpent: previouslySpent } = results
 	const { accumulatedEarnings = 0, roundsPlayed = 0, accumulatedSpend = 0 } = oldData
 	const newData = {
@@ -18,7 +18,7 @@ const SaveResults = async (dataFile, oldData, results) => {
 	// Calc profit loss
 	newData.accumulatedProfitLoss = newData.accumulatedEarnings - newData.accumulatedSpend
 	// Write data to file
-	await writeData(dataFile, newData)
+	writeData(dataFile, newData)
 	// Return new data
 	return newData
 }
