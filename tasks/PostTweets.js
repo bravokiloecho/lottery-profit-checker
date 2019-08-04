@@ -38,14 +38,21 @@ const postTweet = (status, id) => {
 }
 
 const PostTweets = async (tweets) => {
-	const [tweet1, tweet2] = tweets
-	// Post first tweet
-	const { id_str: id } = await postTweet(tweet1)
-	// Post second tweet
-	await postTweet(tweet2, id)
-	// Finish
-	return 'Done!'
-	// console.log(response)
+	return new Promise(async (resolve) => {
+		const [tweet1, tweet2] = tweets
+		// Post first tweet
+		const { id_str: id } = await postTweet(tweet1).catch((err) => {
+			// If error...
+			console.error(err)
+		})
+		// Post second tweet
+		await postTweet(tweet2, id).catch((err) => {
+			// If error...
+			console.error(err)
+		})
+		// Finish
+		resolve()
+	})
 }
 
 module.exports = PostTweets
