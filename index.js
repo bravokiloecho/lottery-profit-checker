@@ -10,16 +10,18 @@ const BuildTweet = require('./tasks/BuildTweet')
 const PostTweets = require('./tasks/PostTweets')
 const StartCron = require('./tasks/StartCron')
 
-const dataFile = './db/data.json'
+const dataFile = `${__dirname}/db/data.json`
 
 const CheckProfit = async () => {
 	// Get previous state
 	const previousSummary = await ReadData(dataFile)
+	console.log('previousSummary', previousSummary)
 	// Get the results from the draw
 	const results = await GetResults().catch((err) => {
 		// If error...
 		console.error(err)
 	})
+	console.log('results', results)
 	// Get the prize money values
 	const { drawNumber } = results
 	const prizes = await GetPrizes(drawNumber).catch((err) => {
@@ -28,15 +30,20 @@ const CheckProfit = async () => {
 	})
 	// Test the tickets
 	const outcome = TestTickets(results, prizes, previousSummary)
+	console.log('outcome', outcome)
 	// Save new results and get summary
-	const summary = await SaveResults(dataFile, previousSummary, outcome)
+	const summary = SaveResults(dataFile, previousSummary, outcome)
+	console.log('summary', summary)
 	// Format data
 	const formattedData = FormatData(results, outcome, summary)
+	console.log('formattedData', formattedData)
 	// Build tweets
 	const tweets = BuildTweet(formattedData)
+	console.log('tweets', tweets)
 	// Post tweet
 	await PostTweets(tweets)
+	console.log('Tweest potsed')
 }
 
-// CheckProfit()
+CheckProfit()
 StartCron(CheckProfit)
