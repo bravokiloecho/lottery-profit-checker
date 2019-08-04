@@ -14,8 +14,6 @@ function downloadResultsPage(drawNumber) {
 		url,
 	}
 
-	console.log(url);
-
 	return new Promise((resolve, reject) => {
 		curl.request(options, (err, html) => {
 			if (err) {
