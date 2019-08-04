@@ -1,11 +1,17 @@
+const env = require('node-env-file')
+const path = require('path')
 const Twitter = require('twitter')
 
-const client = new Twitter({
+env(`${path.join(__dirname, '..')}/.env`)
+
+const twitterKeys = {
 	consumer_key: process.env.TWITTER_CONSUMER_KEY,
 	consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
 	access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
 	access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
-})
+}
+
+const client = new Twitter(twitterKeys)
 
 const params = { screen_name: 'lottery_sim_bot' }
 

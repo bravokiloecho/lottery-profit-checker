@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 const ReadData = require('./tasks/ReadData')
 const GetResults = require('./tasks/GetResults')
 const GetPrizes = require('./tasks/GetPrizes')
