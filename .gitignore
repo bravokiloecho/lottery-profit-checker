@@ -37,3 +37,6 @@ db/data.json
 serverStart.sh
 serverStop.sh
 webfaction/
+
+# Tools
+deletAllTweets.py
