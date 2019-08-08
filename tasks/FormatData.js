@@ -5,7 +5,7 @@ dayjs.extend(advancedFormat)
 
 const FormatData = (results, outcome, summary) => {
 	const { drawDate } = results
-	const prettyDate = dayjs('06-Jul-2019', 'DD-MMM-YYY').format(
+	const prettyDate = dayjs(drawDate, 'DD-MMM-YYY').format(
 		'dddd Do MMMM, YYYY',
 	)
 	const {
