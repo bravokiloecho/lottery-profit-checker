@@ -7,6 +7,7 @@ function formTweet(data) {
 		moneySpent,
 		ticketsBought,
 		previousFreeTickets,
+		totalTicketsUsed,
 		cashWon,
 		freeTicketsWon,
 		roundEarnings,
@@ -29,21 +30,21 @@ function formTweet(data) {
 	}
 
 	tweetText1 += `On ${prettyDate}, `
-	tweetText1 += `${cashWon} and ${freeTicketsWon} free tickets were won `
-	tweetText1 += `with ${ticketsBought + previousFreeTickets}. `
-	tweetText1 += `${moneySpent} bought ${ticketsBought} tickets`
+	tweetText1 += `${cashWon} and ${freeTicketsWon} free tickets were won. `
+	tweetText1 += `The total spend was ${moneySpent} on ${ticketsBought} tickets`
 	if (previousFreeTickets) {
-		tweetText1 += ` with an additional ${previousFreeTickets} free tickets used from the previous draw. `
+		tweetText1 += ` with an additional ${previousFreeTickets} free tickets from the previous draw.`
 	} else {
-		tweetText1 += '. '
+		tweetText1 += '.'
 	}
 
-	tweetText1 += `This results in a ${earningsWord} of ${roundEarnings} for this round.\n`
+	tweetText1 += '\n\n'
+
+	tweetText1 += `This results in a ${earningsWord} of ${roundEarnings} for this round.`
 
 	// SECOND TWEET
-	tweetText2 += `${accumulatedEarnings} has now been won `
-	tweetText2 += `after ${roundsPlayed} ${roundsWord}, and a total spend of ${accumulatedSpend}. `
-	tweetText2 += `The overall ${accumulatedEarningsWord} is currently ${accumulatedProfitLoss}.`
+	tweetText2 += `After ${roundsPlayed} ${roundsWord} the overall ${accumulatedEarningsWord} is ${accumulatedProfitLoss} `
+	tweetText2 += `after spending ${accumulatedSpend} and winning ${accumulatedEarnings}.`
 
 	return [tweetText1, tweetText2]
 }
