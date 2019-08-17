@@ -33,6 +33,7 @@ const FormatData = (results, outcome, summary) => {
 	const currencyFormatter = new Intl.NumberFormat('en-GB', {
 		style: 'currency',
 		currency: 'GBP',
+		minimumFractionDigits: 0,
 	})
 
 	return {
