@@ -6,7 +6,7 @@ const logDate = () => {
 
 const StartCron = (func = () => {}) => {
 	// Every Wednesday and Saturday at 21:00
-	const cronPattern = '0 20 * * Wednesday,Saturday'
+	const cronPattern = '0 21 * * Wednesday,Saturday'
 	console.log('valid?', cron.validate(cronPattern))
 	cron.schedule(cronPattern, () => {
 		console.log('Run tasks')
